@@ -1,5 +1,24 @@
 Rcpp: Seamless R and C++ Integration
 ====================================
+This is a version of the CRAN Rcpp package, modifed to run with TIBCO Enterprise Runtime for R (TERR).
+
+This repository contains the modified source Rcpp package. It also contains Windows and Linux X86_64 binary of the package (under inst/binary).
+
+To install the Windows binary in TERR, run:
+
+> URL <-
+>   "https://raw.github.com/TIBCOSoftware/terr-Rcpp/master/inst/binary/Rcpp_0.11.3-0.zip"
+> pkgfile <- paste(tempdir(), basename(URL), sep="/")
+> download.file(URL, destfile=pkgfile)
+> install.packages(pkgfile, repos=NULL)
+
+To install the Linux binary in TERR, run:
+
+> URL <-
+>   "https://raw.github.com/TIBCOSoftware/terr-Rcpp/master/inst/binary/Rcpp_0.11.3-0_R_x86_64-unknown-linux-gnu.tar.gz"
+> pkgfile <- paste(tempdir(), basename(URL), sep="/")
+> download.file(URL, destfile=pkgfile)
+> install.packages(pkgfile, repos=NULL, type="binary")
 
 [![Build Status](https://travis-ci.org/RcppCore/Rcpp.png)](https://travis-ci.org/RcppCore/Rcpp)
 

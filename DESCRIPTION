@@ -27,3 +27,4 @@ Packaged: 2014-09-27 18:09:31.513913 UTC; edd
 NeedsCompilation: yes
 Repository: CRAN
 Date/Publication: 2014-09-29 09:05:29
+Interpreter: TERR (>= 3.1.0)

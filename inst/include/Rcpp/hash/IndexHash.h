@@ -52,7 +52,7 @@ namespace Rcpp{
         typedef typename traits::storage_type<RTYPE>::type STORAGE ;
         typedef Vector<RTYPE> VECTOR ;
 
-        IndexHash( SEXP table ) : n(Rf_length(table)), m(2), k(1), src( (STORAGE*)dataptr(table) ), size_(0)
+        IndexHash( SEXP table ) : n(Rf_length(table)), m(2), k(1), src(table), size_(0)
             , data()
         #ifdef HASH_PROFILE
             , profile_data()
@@ -96,7 +96,7 @@ namespace Rcpp{
 
         // use the pointers for actual (non sugar expression vectors)
         inline SEXP lookup(const VECTOR& vec) const {
-            return lookup__impl(vec.begin(), vec.size() ) ;
+            return lookup__impl(vec, vec.size()) ;
         }
 
         inline bool contains(STORAGE val) const {
@@ -117,7 +117,9 @@ namespace Rcpp{
         }
 
         int n, m, k ;
-        STORAGE* src ;
+        //STORAGE* src ;
+        VECTOR src ;
+
         int size_ ;
         #ifdef RCPP_USE_CACHE_HASH
             int* data ;
@@ -188,7 +190,7 @@ namespace Rcpp{
         inline int get_index(STORAGE value) const {
             int addr = get_addr(value) ;
             while (data[addr]) {
-              if (src[data[addr] - 1] == value)
+              if (value == src[data[addr]-1])
                 return data[addr];
               addr++;
               if (addr == m) addr = 0;
